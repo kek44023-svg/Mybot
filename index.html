@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ဗီဒီယိုကြည့်ရန် - Smart Hub</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            background: #0f172a; 
+            color: #fff; 
+            text-align: center; 
+            padding: 40px 20px; 
+            margin: 0;
+        }
+        .box { 
+            background: #1e293b; 
+            padding: 30px 20px; 
+            border-radius: 12px; 
+            display: inline-block; 
+            max-width: 400px; 
+            width: 100%; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        h2 { color: #38bdf8; margin-bottom: 10px; }
+        p { color: #94a3b8; font-size: 14px; }
+        a.btn { 
+            background: #3b82f6; 
+            color: white; 
+            border: none; 
+            padding: 14px 20px; 
+            font-size: 16px; 
+            font-weight: bold;
+            border-radius: 8px; 
+            cursor: pointer; 
+            text-decoration: none; 
+            display: block; 
+            margin-top: 20px; 
+            width: 100%; 
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+        a.btn:hover { background: #2563eb; }
+        .btn-green { background: #22c55e !important; }
+        .btn-green:hover { background: #16a34a !important; }
+        .hidden { display: none; }
+        .timer-box { font-size: 16px; color: #facc15; margin: 15px 0; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h2>🎥 ဗီဒီယို ရယူရန်</h2>
+        <p>ကျေးဇူးပြု၍ အောက်ပါကြော်ငြာကို နှိပ်ပြီး ဝင်ရောက်ကြည့်ရှုပေးပါရန်။</p>
+        
+        <div id="timer-box" class="timer-box">
+            ⏳ ဆက်လက်လုပ်ဆောင်ရန် <span id="countdown">5</span> စက္ကန့် စောင့်ပါ...
+        </div>
+
+        <!-- အလှည့်ကျပေါ်မည့် ကြော်ငြာခလုတ် -->
+        <a id="rotational-ad-btn" href="#" target="_blank" class="btn hidden" onclick="unlockVideo()">
+            👉 ကြော်ငြာကြည့်ပြီး ဗီဒီယိုလင့်ခ် ရယူရန်
+        </a>
+
+        <!-- တကယ့် ဗီဒီယိုလင့်ခ် (ဒါလည်း လိုသလို အလှည့်ကျပြောင်းပေးလို့ရပါတယ်) -->
+        <a id="final-video-btn" href="#" target="_blank" class="btn hidden btn-green" style="background: #8b5cf6 !important;">
+            ▶️ တကယ့် ဗီဒီယိုကို စတင်ကြည့်မည်
+        </a>
+    </div>
+
+    <script>
+        // ပေးထားသော ကြော်ငြာလင့်ခ်စာရင်း (Array)
+        const adLinks = [
+            "https://www.profitableratecpmnetwork.com/b78gy7qz2?key=6211da8bfcdaec886f63c404d0f4a951",
+            "https://www.profitableratecpmnetwork.com/vc78z4qjs6?key=dd8859e6972c4ed6f238cb73ca2ac340"
+        ];
+
+        // ဗီဒီယို/ဒေါင်းလုပ် လင့်ခ်စာရင်း (Array)
+        const videoLinks = [
+            "https://auctionr.org/4/7e959604b859da85f8904c4de57d3b7d",
+            "https://auctionr.org/4/eddc6695e1715ccf6cebce8f9f3325b7"
+        ];
+
+        // ဝင်ရောက်လာသူတိုင်း လင့်ခ်များကို အလှည့်ကျ (သို့မဟုတ် Random) ရွေးချယ်ပေးမည့် စနစ်
+        // ဒီနေရာမှာ SessionStorage သို့မဟုတ် Math.random ကိုသုံးပြီး အလှည့်ကျစီစဉ်ပေးပါတယ်
+        function getRandomItem(array) {
+            let randomIndex = Math.floor(Math.random() * array.length);
+            return array[randomIndex];
+        }
+
+        // လင့်ခ်များကို ခလုတ်ထဲသို့ ထည့်သွင်းခြင်း
+        const selectedAdLink = getRandomItem(adLinks);
+        const selectedVideoLink = getRandomItem(videoLinks);
+
+        document.getElementById('rotational-ad-btn').href = selectedAdLink;
+        document.getElementById('final-video-btn').href = selectedVideoLink;
+
+        let timeLeft = 5;
+        const countdownEl = document.getElementById('countdown');
+        const timerBox = document.getElementById('timer-box');
+        const rotAdBtn = document.getElementById('rotational-ad-btn');
+        const finalVideoBtn = document.getElementById('final-video-btn');
+
+        // စက္ကန့်ရေတွက်ခြင်း
+        let timer = setInterval(() => {
+            timeLeft--;
+            countdownEl.textContent = timeLeft;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                timerBox.style.display = 'none';
+                rotAdBtn.classList.remove('hidden'); // ကြော်ငြာခလုတ် ပေါ်လာမည်
+            }
+        }, 1000);
+
+        function unlockVideo() {
+            // ကြော်ငြာခလုတ်ကို နှိပ်ပြီးပါက ဗီဒီယိုကြည့်မည့်ခလုတ် ပေါ်လာမည်
+            setTimeout(() => {
+                rotAdBtn.style.display = 'none';
+                finalVideoBtn.classList.remove('hidden');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
