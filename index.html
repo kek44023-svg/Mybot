@@ -44,6 +44,7 @@
         .hidden { display: none; }
         .timer-box { font-size: 16px; color: #facc15; margin: 15px 0; font-weight: bold; }
         video { width: 100%; border-radius: 8px; margin-top: 15px; }
+        .banner-ad { margin: 15px 0; overflow: hidden; display: flex; justify-content: center; }
     </style>
 </head>
 <body>
@@ -52,13 +53,19 @@
         <h2>🎥 ဗီဒီယို ကြည့်ရှုရန်</h2>
         <p id="instruction">ကျေးဇူးပြု၍ အောက်ပါကြော်ငြာကို နှိပ်ပြီး ခဏစောင့်ပါ...</p>
         
+        <!-- 🌐 နေရာ (၁): Banner Ad (HTML Tag ပုံစံ) -->
+        <div class="banner-ad">
+            <ins style="display:inline-block;width:100%;max-width:728px;height:90px" data-width="728" data-height="90" class="p075ea45c3b" data-domain="//data527.click" data-affquery="/67738143bce571a1cfc2/075ea45c3b/?placementName=default"></ins>
+            <script src="//data527.click/js/responsive.js" async></script>
+        </div>
+
         <!-- ၁၀ စက္ကန့် တိုင်ပ်မာ -->
         <div id="timer-box" class="timer-box">
             ⏳ ကြော်ငြာခလုတ် ပေါ်လာရန် <span id="countdown">10</span> စက္ကန့် စောင့်ပါ...
         </div>
 
-        <!-- ကြော်ငြာခလုတ် (JavaScript ဖြင့် လင့်ခ်အလိုအလျောက် ချိတ်မည်) -->
-        <a id="ad-btn" href="#" target="_blank" class="btn hidden" onclick="unlockVideo()">
+        <!-- ကြော်ငြာခလုတ် (Direct Link) -->
+        <a id="ad-btn" href="https://data527.click/4a3bc8b30585b0196767/34c8a2d139/?placementName=default" target="_blank" class="btn hidden" onclick="unlockVideo()">
             👉 ဤနေရာကိုနှိပ်၍ ကြော်ငြာကြည့်ပါ (Ads)
         </a>
 
@@ -66,32 +73,29 @@
         <div id="video-container" class="hidden">
             <p style="color: #22c55e; font-weight: bold;">✅ အောင်မြင်ပါသည်။ ဗီဒီယို စတင်ကြည့်ရှုနိုင်ပါပြီ -</p>
             <video id="main-video" controls controlsList="nodownload">
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                <source id="video-source" src="" type="video/mp4">
                 သင့်ဘရောက်ဆာသည် ဗီဒီယိုကို မပံ့ပိုးပါ။
             </video>
         </div>
     </div>
 
+    <!-- 🌐 နေရာ (၂): Script Ad (Popunder သို့မဟုတ် Native Script) -->
+    <script type="text/javascript" src="//data527.click/cefe12b354cc83ecd966/38b30e8028/?placementName=default"></script>
+
     <script>
-        // ပေးထားသည့် ကြော်ငြာလင့်ခ် ၄ ခု
-        var adLinks = [
-            "https://www.profitableratecpmnetwork.com/b78gy7qz2?key=6211da8bfcdaec886f63c404d0f4a951",
-            "https://www.profitableratecpmnetwork.com/vc78z4qjs6?key=dd8859e6972c4ed6f238cb73ca2ac340",
-            "https://auctionr.org/4/7e959604b859da85f8904c4de57d3b7d",
-            "https://auctionr.org/4/eddc6695e1715ccf6cebce8f9f3325b7"
-        ];
+        // URL ထဲက ဗီဒီယိုလင့်ခ်ကို ဖမ်းယူခြင်း
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoUrl = urlParams.get('v');
 
-        // ကျပန်း (Random) လင့်ခ်တစ်ခု ရွေးထုတ်ခြင်း
-        var randomIndex = Math.floor(Math.random() * adLinks.length);
-        var selectedAd = adLinks[randomIndex];
-
-        // ခလုတ်ထဲသို့ လင့်ခ်ထည့်ခြင်း
-        var adButton = document.getElementById('ad-btn');
-        adButton.href = selectedAd;
+        if (videoUrl) {
+            document.getElementById('video-source').src = decodeURIComponent(videoUrl);
+            document.getElementById('main-video').load();
+        }
 
         var timeLeft = 10;
         var countdownEl = document.getElementById('countdown');
         var timerBox = document.getElementById('timer-box');
+        var adButton = document.getElementById('ad-btn');
 
         // ၁၀ စက္ကန့် ရေတွက်ခြင်း
         var downloadTimer = setInterval(function() {
