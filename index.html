@@ -10,19 +10,19 @@
             background: #0f172a; 
             color: #fff; 
             text-align: center; 
-            padding: 40px 20px; 
+            padding: 30px 15px; 
             margin: 0;
         }
         .box { 
             background: #1e293b; 
-            padding: 30px 20px; 
+            padding: 25px 15px; 
             border-radius: 12px; 
             display: inline-block; 
-            max-width: 400px; 
+            max-width: 450px; 
             width: 100%; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        h2 { color: #38bdf8; margin-bottom: 10px; }
+        h2 { color: #38bdf8; font-size: 20px; margin-bottom: 10px; }
         p { color: #94a3b8; font-size: 14px; }
         a.btn { 
             background: #3b82f6; 
@@ -35,71 +35,62 @@
             cursor: pointer; 
             text-decoration: none; 
             display: block; 
-            margin-top: 20px; 
+            margin: 15px 0; 
             width: 100%; 
             box-sizing: border-box;
-            transition: 0.3s;
         }
         a.btn:hover { background: #2563eb; }
-        .btn-green { background: #22c55e !important; }
-        .btn-green:hover { background: #16a34a !important; }
         .hidden { display: none; }
-        .timer-box { font-size: 16px; color: #facc15; margin: 15px 0; font-weight: bold; }
+        .timer-box { font-size: 15px; color: #facc15; margin: 15px 0; font-weight: bold; }
+        video { width: 100%; border-radius: 8px; margin-top: 15px; }
     </style>
 </head>
 <body>
 
     <div class="box">
-        <h2>🎥 ဗီဒီယို ရယူရန်</h2>
-        <p>ကျေးဇူးပြု၍ အောက်ပါကြော်ငြာကို နှိပ်ပြီး ဝင်ရောက်ကြည့်ရှုပေးပါရန်။</p>
+        <h2>🎥 ဗီဒီယို ကြည့်ရှုရန်</h2>
+        <p id="instruction">ဗီဒီယိုကို ဖွင့်ကြည့်ရန် အောက်ပါကြော်ငြာကို ဦးစွာ နှိပ်ပါရန်။</p>
         
         <div id="timer-box" class="timer-box">
-            ⏳ ဆက်လက်လုပ်ဆောင်ရန် <span id="countdown">5</span> စက္ကန့် စောင့်ပါ...
+            ⏳ ကြော်ငြာလင့်ခ် ရယူရန် <span id="countdown">5</span> စက္ကန့် စောင့်ပါ...
         </div>
 
-        <!-- အလှည့်ကျပေါ်မည့် ကြော်ငြာခလုတ် -->
-        <a id="rotational-ad-btn" href="#" target="_blank" class="btn hidden" onclick="unlockVideo()">
-            👉 ကြော်ငြာကြည့်ပြီး ဗီဒီယိုလင့်ခ် ရယူရန်
+        <!-- ပေးထားသော လင့်ခ် ၄ ခုထဲမှ တစ်ခု အလှည့်ကျပေါ်မည့် ခလုတ် -->
+        <a id="ad-btn" href="#" target="_blank" class="btn hidden" onclick="verifyAdWatched()">
+            👉 ဤနေရာကိုနှိပ်၍ ကြော်ငြာကြည့်ပါ (Ads)
         </a>
 
-        <!-- တကယ့် ဗီဒီယိုလင့်ခ် (ဒါလည်း လိုသလို အလှည့်ကျပြောင်းပေးလို့ရပါတယ်) -->
-        <a id="final-video-btn" href="#" target="_blank" class="btn hidden btn-green" style="background: #8b5cf6 !important;">
-            ▶️ တကယ့် ဗီဒီယိုကို စတင်ကြည့်မည်
-        </a>
+        <!-- ကြော်ငြာကြည့်ပြီးမှ ပေါ်လာမည့် ဗီဒီယို Player -->
+        <div id="video-container" class="hidden">
+            <p style="color: #22c55e; font-weight: bold;">✅ ကြော်ငြာကြည့်ရှုခြင်း အောင်မြင်ပါသည်။ ဗီဒီယို စတင်နိုင်ပါပြီ -</p>
+            <video id="main-video" controls controlsList="nodownload">
+                <source src="YOUR_REAL_VIDEO_MP4_URL" type="video/mp4">
+                သင့်ဘရောက်ဆာသည် ဗီဒီယိုကို မပံ့ပိုးပါ။
+            </video>
+        </div>
     </div>
 
     <script>
-        // ပေးထားသော ကြော်ငြာလင့်ခ်စာရင်း (Array)
-        const adLinks = [
+        // ပေးထားသည့် ကြော်ငြာလင့်ခ် ၄ ခုလုံး စာရင်း
+        const allAdLinks = [
             "https://www.profitableratecpmnetwork.com/b78gy7qz2?key=6211da8bfcdaec886f63c404d0f4a951",
-            "https://www.profitableratecpmnetwork.com/vc78z4qjs6?key=dd8859e6972c4ed6f238cb73ca2ac340"
-        ];
-
-        // ဗီဒီယို/ဒေါင်းလုပ် လင့်ခ်စာရင်း (Array)
-        const videoLinks = [
+            "https://www.profitableratecpmnetwork.com/vc78z4qjs6?key=dd8859e6972c4ed6f238cb73ca2ac340",
             "https://auctionr.org/4/7e959604b859da85f8904c4de57d3b7d",
             "https://auctionr.org/4/eddc6695e1715ccf6cebce8f9f3325b7"
         ];
 
-        // ဝင်ရောက်လာသူတိုင်း လင့်ခ်များကို အလှည့်ကျ (သို့မဟုတ် Random) ရွေးချယ်ပေးမည့် စနစ်
-        // ဒီနေရာမှာ SessionStorage သို့မဟုတ် Math.random ကိုသုံးပြီး အလှည့်ကျစီစဉ်ပေးပါတယ်
-        function getRandomItem(array) {
-            let randomIndex = Math.floor(Math.random() * array.length);
-            return array[randomIndex];
+        // ဝင်လာသူတိုင်း သို့မဟုတ် ဖွင့်တိုင်း လင့်ခ်များကို အလှည့်ကျ ရွေးချယ်ပေးရန်
+        function getRandomAd() {
+            const randomIndex = Math.floor(Math.random() * allAdLinks.length);
+            return allAdLinks[randomIndex];
         }
 
-        // လင့်ခ်များကို ခလုတ်ထဲသို့ ထည့်သွင်းခြင်း
-        const selectedAdLink = getRandomItem(adLinks);
-        const selectedVideoLink = getRandomItem(videoLinks);
-
-        document.getElementById('rotational-ad-btn').href = selectedAdLink;
-        document.getElementById('final-video-btn').href = selectedVideoLink;
+        document.getElementById('ad-btn').href = getRandomAd();
 
         let timeLeft = 5;
         const countdownEl = document.getElementById('countdown');
         const timerBox = document.getElementById('timer-box');
-        const rotAdBtn = document.getElementById('rotational-ad-btn');
-        const finalVideoBtn = document.getElementById('final-video-btn');
+        const adBtn = document.getElementById('ad-btn');
 
         // စက္ကန့်ရေတွက်ခြင်း
         let timer = setInterval(() => {
@@ -108,15 +99,16 @@
             if (timeLeft <= 0) {
                 clearInterval(timer);
                 timerBox.style.display = 'none';
-                rotAdBtn.classList.remove('hidden'); // ကြော်ငြာခလုတ် ပေါ်လာမည်
+                adBtn.classList.remove('hidden');
             }
         }, 1000);
 
-        function unlockVideo() {
-            // ကြော်ငြာခလုတ်ကို နှိပ်ပြီးပါက ဗီဒီယိုကြည့်မည့်ခလုတ် ပေါ်လာမည်
+        // အသုံးပြုသူက ကြော်ငြာခလုတ်ကို နှိပ်လိုက်သောအခါ
+        function verifyAdWatched() {
             setTimeout(() => {
-                rotAdBtn.style.display = 'none';
-                finalVideoBtn.classList.remove('hidden');
+                document.getElementById('instruction').style.display = 'none';
+                adBtn.style.display = 'none';
+                document.getElementById('video-container').classList.remove('hidden');
             }, 1000);
         }
     </script>
