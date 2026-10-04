@@ -53,7 +53,7 @@
         <h2>🎥 ဗီဒီယို ကြည့်ရှုရန်</h2>
         <p id="instruction">ကျေးဇူးပြု၍ အောက်ပါကြော်ငြာကို နှိပ်ပြီး ခဏစောင့်ပါ...</p>
         
-        <!-- 🌐 နေရာ (၁): Banner Ad (HTML Tag ပုံစံ) -->
+        <!-- Banner Ad -->
         <div class="banner-ad">
             <ins style="display:inline-block;width:100%;max-width:728px;height:90px" data-width="728" data-height="90" class="p075ea45c3b" data-domain="//data527.click" data-affquery="/67738143bce571a1cfc2/075ea45c3b/?placementName=default"></ins>
             <script src="//data527.click/js/responsive.js" async></script>
@@ -64,7 +64,7 @@
             ⏳ ကြော်ငြာခလုတ် ပေါ်လာရန် <span id="countdown">10</span> စက္ကန့် စောင့်ပါ...
         </div>
 
-        <!-- ကြော်ငြာခလုတ် (Direct Link) -->
+        <!-- ကြော်ငြာ Direct Link ခလုတ် -->
         <a id="ad-btn" href="https://data527.click/4a3bc8b30585b0196767/34c8a2d139/?placementName=default" target="_blank" class="btn hidden" onclick="unlockVideo()">
             👉 ဤနေရာကိုနှိပ်၍ ကြော်ငြာကြည့်ပါ (Ads)
         </a>
@@ -79,7 +79,7 @@
         </div>
     </div>
 
-    <!-- 🌐 နေရာ (၂): Script Ad (Popunder သို့မဟုတ် Native Script) -->
+    <!-- Script Ad -->
     <script type="text/javascript" src="//data527.click/cefe12b354cc83ecd966/38b30e8028/?placementName=default"></script>
 
     <script>
@@ -97,18 +97,16 @@
         var timerBox = document.getElementById('timer-box');
         var adButton = document.getElementById('ad-btn');
 
-        // ၁၀ စက္ကန့် ရေတွက်ခြင်း
         var downloadTimer = setInterval(function() {
             timeLeft--;
             countdownEl.textContent = timeLeft;
             if (timeLeft <= 0) {
                 clearInterval(downloadTimer);
                 timerBox.style.display = 'none';
-                adButton.classList.remove('hidden'); // ခလုတ်ပေါ်လာစေရန်
+                adButton.classList.remove('hidden');
             }
         }, 1000);
 
-        // ကြော်ငြာခလုတ်ကို နှိပ်လိုက်သောအခါ ဗီဒီယိုပေါ်လာစေရန်
         function unlockVideo() {
             setTimeout(function() {
                 document.getElementById('instruction').style.display = 'none';
