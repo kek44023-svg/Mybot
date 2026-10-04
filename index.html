@@ -59,17 +59,17 @@
             <script src="//data527.click/js/responsive.js" async></script>
         </div>
 
-        <!-- ၁၀ စက္ကန့် တိုင်ပ်မာ -->
+        <!-- Timer -->
         <div id="timer-box" class="timer-box">
             ⏳ ကြော်ငြာခလုတ် ပေါ်လာရန် <span id="countdown">10</span> စက္ကန့် စောင့်ပါ...
         </div>
 
-        <!-- ကြော်ငြာ Direct Link ခလုတ် -->
+        <!-- Ad Button -->
         <a id="ad-btn" href="https://data527.click/4a3bc8b30585b0196767/34c8a2d139/?placementName=default" target="_blank" class="btn hidden" onclick="unlockVideo()">
             👉 ဤနေရာကိုနှိပ်၍ ကြော်ငြာကြည့်ပါ (Ads)
         </a>
 
-        <!-- ဗီဒီယိုပြမည့် နေရာ -->
+        <!-- Video Container -->
         <div id="video-container" class="hidden">
             <p style="color: #22c55e; font-weight: bold;">✅ အောင်မြင်ပါသည်။ ဗီဒီယို စတင်ကြည့်ရှုနိုင်ပါပြီ -</p>
             <video id="main-video" controls controlsList="nodownload">
@@ -83,7 +83,7 @@
     <script type="text/javascript" src="//data527.click/cefe12b354cc83ecd966/38b30e8028/?placementName=default"></script>
 
     <script>
-        // URL ထဲက ဗီဒီယိုလင့်ခ်ကို ဖမ်းယူခြင်း
+        // URL ထဲက ဗီဒီယိုလင့်ခ် (v parameter) ကို ဖမ်းယူခြင်း
         const urlParams = new URLSearchParams(window.location.search);
         const videoUrl = urlParams.get('v');
 
@@ -107,7 +107,7 @@
             }
         }, 1000);
 
-        function unlockVideo() {
+-       function unlockVideo() {
             setTimeout(function() {
                 document.getElementById('instruction').style.display = 'none';
                 adButton.style.display = 'none';
