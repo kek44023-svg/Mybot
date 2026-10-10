@@ -7,66 +7,75 @@
     <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
-    <!-- 1. Social Bar Ad Script (Header ထဲတွင် ထည့်သွင်းထားသည်) -->
+    <!-- Social Bar Ad Script -->
     <script type="text/javascript" src="//cdn-server.live/ebbfab0980c21524dec0/58468e6bb4/?placementName=default" async></script>
 
     <style>
         body { 
             font-family: sans-serif; 
             text-align: center; 
-            padding: 15px; 
+            padding: 20px 10px; 
             background: #111; 
             color: #fff; 
             margin: 0;
         }
         .hidden { display: none; }
-        #timer-box { margin: 15px 0; }
-        #timer { font-size: 28px; color: #ffcc00; font-weight: bold; }
+        #timer-box { margin: 15px 0; font-size: 16px; }
+        #timer { font-size: 32px; color: #ffcc00; font-weight: bold; }
         .btn { 
             background: #28a745; 
             color: white; 
-            padding: 14px 24px; 
+            padding: 14px 20px; 
             border: none; 
             border-radius: 8px; 
             font-size: 16px; 
             cursor: pointer; 
             font-weight: bold;
             width: 100%;
-            max-width: 300px;
+            max-width: 320px;
+            margin-top: 10px;
         }
-        .btn:active { background: #218838; }
-        .ad-banner-box {
-            margin: 20px auto;
+        .btn-ad {
+            background: #0088cc;
+            margin-bottom: 15px;
+        }
+        .ad-container {
+            margin: 15px auto;
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 250px;
         }
     </style>
 </head>
 <body>
 
     <h2>🎥 ဗီဒီယိုကြည့်ရှုရန်</h2>
-    <p>ကြော်ငြာကို ၁၅ စက္ကန့် စောင့်ဆိုင်းပေးပါ...</p>
+    <p>ကျေးဇူးပြု၍ ခဏစောင့်ဆိုင်းပေးပါ...</p>
     
     <div id="timer-box">
         ကျန်ရှိချိန်: <span id="timer">15</span> စက္ကန့်
     </div>
 
-    <!-- 2. Banner Ad (300x600 Banner) -->
-    <div class="ad-banner-box">
-        <ins style="display:inline-block;width:300px;height:600px" data-width="300" data-height="600" class="n041ce4af46" data-domain="//data527.click" data-affquery="/c7e4b264afcc3cec8b4a/041ce4af46/?placementName=default"></ins>
-        <script src="//data527.click/js/responsive.js" async></script>
+    <!-- Banner Ad Container (Responsive ဖြစ်စေရန် ပြင်ဆင်ထားသည်) -->
+    <div class="ad-container">
+        <script type="text/javascript" src="//data527.click/js/responsive.js" async></script>
+        <ins class="n041ce4af46" data-domain="//data527.click" data-affquery="/c7e4b264afcc3cec8b4a/041ce4af46/?placementName=default" style="display:inline-block;width:300px;height:250px;" data-width="300" data-height="250"></ins>
     </div>
 
-    <!-- အချိန်ပြည့်မှ ပေါ်လာမည့် ဗီဒီယိုဖွင့်ရန် ခလုတ် (Smartlink ဖြင့် ချိတ်ဆက်ထားသည်) -->
-    <div id="action-box" class="hidden" style="margin-top: 25px; margin-bottom: 30px;">
+    <!-- အချိန်ပြည့်မှ ပေါ်လာမည့် ခလုတ်များ -->
+    <div id="action-box" class="hidden">
+        <!-- အကယ်၍ ကြော်ငြာမပေါ်ရင် နှိပ်ပြီး ဝင်လို့ရမယ့် Direct Ad Link ခလုတ် -->
+        <button class="btn btn-ad" onclick="openDirectAd()">📢 ထပ်ဆောင်း ကြော်ငြာနှိပ်ရန်</button>
+        <br>
         <button class="btn" onclick="openVideo()">ဗီဒီယိုဖွင့်မည် ▶️</button>
     </div>
 
     <script>
         let timeLeft = 15;
         let tg = window.Telegram.WebApp;
-        tg.expand(); // Mini ကို အပြည့်ချဲ့ရန်
+        tg.expand();
 
         let countdown = setInterval(function() {
             timeLeft--;
@@ -79,15 +88,15 @@
             }
         }, 1000);
 
-        function openVideo() {
-            // 3. Smartlink (၁၅ စက္ကန့်ပြည့်ပြီး ခလုတ်နှိပ်မှ Smartlink သို့ သွားမည်)
+        function openDirectAd() {
+            // Smartlink ကို ဂျာနယ်လည်ပတ်မှုအတွက် တိုက်ရိုက်ဖွင့်ပေးရန်
             const smartLinkURL = "https://data527.click/4a3bc8b30585b0196767/c274c56a98/?placementName=default";
-            
-            // User ကို Smartlink သို့ ပို့မည် (သို့မဟုတ် New Tab ဖြင့် ဖွင့်မည်)
             window.open(smartLinkURL, '_blank');
-            
-            // လိုအပ်ပါက Telegram Web App ကို ပိတ်ရန် (tg.close() သုံးနိုင်သည်)
-            // tg.close();
+        }
+
+        function openVideo() {
+            const smartLinkURL = "https://data527.click/4a3bc8b30585b0196767/c274c56a98/?placementName=default";
+            window.open(smartLinkURL, '_blank');
         }
     </script>
 </body>
